@@ -37,3 +37,16 @@ The following packages were added:
   com.unity.modules.wind@1.0.0
   com.unity.modules.xr@1.0.0
   com.unity.timeline@1.4.8
+
+<<<<<<< HEAD
+=== Sun Jan 30 14:19:15 2022
+=======
+=== Fri Jan 28 20:22:19 2022
+>>>>>>> 333b32d3b553ab2ce985d723a7da0902281361ca
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.collab-proxy from version 1.13.5 to 1.15.1
+  com.unity.render-pipelines.universal from version 10.6.0 to 10.7.0
