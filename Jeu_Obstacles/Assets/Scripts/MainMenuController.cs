@@ -65,7 +65,7 @@ public class MainMenuController : MonoBehaviour
         string path = "./Assets/SaveProfiles/"+fileNames[fileIndex]+".json";
         string jsonString = File.ReadAllText (path);
         currentProfile.Populate(jsonString);
-        currentProfile.dates.Add("TEST");
+        currentProfile.UpdateData();
     }
 
     public void QuitButtonPush(){
@@ -78,10 +78,11 @@ public class MainMenuController : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    public void PlayButtonPush(){
+    public void PlayButtonPush(Text p){
         Debug.Log("play");
         if(String.IsNullOrEmpty(currentProfile.name)){
-            Debug.Log("Pls select profil");
+            string text = p.text;
+            p.text = text + "\nPls select profil";
         }
         else{
             SceneManager.LoadScene(2);
