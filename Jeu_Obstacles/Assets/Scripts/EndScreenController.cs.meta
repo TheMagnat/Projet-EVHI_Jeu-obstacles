@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Jeu_Obstacles/Assets/Scripts/GameHandler.cs.meta
+guid: ecec443ae20fce743836d8621c451495
+=======
+guid: 3c5f473debfb1f267b75ea6f9caccfeb
+>>>>>>> 333b32d3b553ab2ce985d723a7da0902281361ca:Jeu_Obstacles/Assets/Scripts/EndScreenController.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
