@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Linq;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using SimpleJSON;
@@ -41,12 +43,140 @@ namespace Profile{
 
         }
         
-        // Somme pondéré des pouls, avec poids croissant: poids qui sommes à n car valeur entière
+        // Poids = (1,2...,n  /Sum(1 à n) ) x n
+        private List<float> genWeights(int size){
+            List<float> weights = Enumerable.Range(1, size).Select(x => x/1.0f).ToList();
+            int denom = (int) weights.Sum();
+            for(int j=0; j<weights.Count; j+=1){
+                weights[j] = weights[j] /denom * size;
+            }
+            return weights;
+        }
+
+        public float getVitesseMean(){
+            List<float> weights = genWeights(this.vitesseDecision.Count);
+            float sum = 0f;
+            int i = 0;
+            foreach(float p in this.vitesseDecision){
+                sum += p * weights[i];
+                i += 1;
+            }
+            return sum/this.vitesseDecision.Count;
+        }
+
+        public float getPoulsMean(){
+            List<float> weights = genWeights(this.pouls.Count);
+            float sum = 0f;
+            int i = 0;
+            foreach(float p in this.pouls){
+                sum += p * weights[i];
+                i += 1;
+            }
+            return sum/this.pouls.Count;
+        }
+
+        public List<float> getPlacementMean(){
+            List<float> weights = genWeights(this.strategiePlacement.Count);
+            List<float> mean = new List<float>();
+            Dictionary<int, int>.KeyCollection keyColl = this.strategiePlacement[0].Keys;
+            int j = 0;
+            foreach(int key in keyColl){
+                mean.Add(0f);
+                for(int i=0; i<this.strategiePlacement.Count; i++){
+                    mean[j] += this.strategiePlacement[i][key] * weights[i];
+                }
+                mean[j] /= this.strategiePlacement.Count;
+                j ++;
+            }
+            return mean;
+        }
+
+        public List<float> getEvitementMean(){
+            List<float> weights = genWeights(this.strategieEvitement.Count);
+            List<float> mean = new List<float>();
+            Dictionary<int, int>.KeyCollection keyColl = this.strategieEvitement[0].Keys;
+            int j = 0;
+            foreach(int key in keyColl){
+                mean.Add(0f);
+                for(int i=0; i<this.strategieEvitement.Count; i++){
+                    mean[j] += this.strategieEvitement[i][key] * weights[i];
+                }
+                mean[j] /= this.strategieEvitement.Count;
+                j ++;
+            }
+            return mean;
+        }
+
+        public List<float> getCameraMean(){
+            List<float> weights = genWeights(this.directionCamera.Count);
+            List<float> mean = new List<float>();
+            Dictionary<int, int>.KeyCollection keyColl = this.directionCamera[0].Keys;
+            int j = 0;
+            foreach(int key in keyColl){
+                mean.Add(0f);
+                for(int i=0; i<this.directionCamera.Count; i++){
+                    mean[j] += this.directionCamera[i][key] * weights[i];
+                }
+                mean[j] /= this.directionCamera.Count;
+                j ++;
+            }
+            return mean;
+        }
+
+        // Code take from https://github.com/markwhitaker/MonthDiff, free of rights
+        private int GetTotalMonthsFrom(DateTime dt1, DateTime dt2)
+        {
+            DateTime earlyDate = (dt1 > dt2) ? dt2.Date : dt1.Date;
+            DateTime lateDate = (dt1 > dt2) ? dt1.Date : dt2.Date;
+
+            // Start with 1 month's difference and keep incrementing
+            // until we overshoot the late date
+            int monthsDiff = 1;
+            while (earlyDate.AddMonths(monthsDiff) <= lateDate)
+            {
+                monthsDiff++;
+            }
+
+            return monthsDiff - 1;
+        }
+
+        public void UpdateData(){
+            DateTime date;
+            DateTime today = DateTime.Now;
+            for(int i=0; i<this.dates.Count; i++){
+                date = DateTime.ParseExact(this.dates[0], "dd-MM-yyyy_HH:mm:ss", null);
+                if(GetTotalMonthsFrom(date,today) > 3){ // Si la date de la session > 3 mois, remove session
+                    this.durees.RemoveAt(0);
+                    this.dates.RemoveAt(0);
+                    this.vitesseDecision.RemoveAt(0);
+                    this.pouls.RemoveAt(0);
+                    this.strategiePlacement.RemoveAt(0);
+                    this.strategieEvitement.RemoveAt(0);
+                    this.directionCamera.RemoveAt(0);
+                }
+            }
+        }
         
-        // Update ancienne donnés
-        
-        // Stratégie placement, somme pondéré element wise poids croissant -> int
-        
-        // Strategie devitement
+        //Base Level equation
+        public float BaseLevel(){
+            float max_ = this.durees.Max();
+            float min_ = (this.durees.Count < 2) ? 0f : this.durees.Min();
+            List<float> wk = new List<float>();
+            for(int i=0; i<this.durees.Count; i++){
+                wk.Add(((this.durees[i] - min_) / (max_ - min_))+1);
+            }
+
+            double sum = (this.dates.Count < 1) ? 0.5: 0.0;
+            double diffDay;
+            DateTime date;
+            TimeSpan diffTime;
+            for(int i=0; i<this.dates.Count; i++){
+                date = DateTime.ParseExact(this.dates[i], "dd-MM-yyyy_HH:mm:ss", null);
+                diffTime = DateTime.Now - date;
+                diffDay = diffTime.TotalDays/wk[i];
+                sum += Math.Pow(diffDay,-0.5);
+            }
+            return (float) Math.Max(Math.Log(sum),0.5);
+        }
     }
 }

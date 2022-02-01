@@ -22,7 +22,7 @@ public class EndScreenController : MonoBehaviour
     }
 
     public void MenuButtonPush(){
-        Debug.Log("create");
+        Debug.Log("menu");
         SceneManager.LoadScene(0);
     }
 
