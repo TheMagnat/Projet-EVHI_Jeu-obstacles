@@ -10,6 +10,8 @@ public class GameHandler : MonoBehaviour
     private GameObject playerObj;
     private UserHandler userHandler;
 
+    public bool dead = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,7 @@ public class GameHandler : MonoBehaviour
 
         //Debug.Log(MainMenuController.currentProfile.strategiePlacement[0][1]);
 
-        if (playerObj.transform.position.y <= -10)
+        if (playerObj.transform.position.y <= -10 || dead)
         {
             //End of game
             userHandler.pushToProfile();

@@ -250,5 +250,19 @@ namespace StarterAssets
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
+
+		private void OnTriggerEnter(Collider other)
+		{
+
+			if (_input.block && other.gameObject.GetComponent<ProjectileHandler>().dodgeMode != 5)
+			{
+				GameObject.FindGameObjectWithTag("UserHandler").GetComponent<UserHandler>().strategieEvitement[3] += 1;
+				Destroy(other.gameObject);	
+			}
+            else {
+				GameObject.FindGameObjectWithTag("GameHandler").GetComponent<GameHandler>().dead = true;
+			}
+		}
+
 	}
 }

@@ -8,14 +8,23 @@ public class EventHandler : MonoBehaviour
     public GameObject obstaclePrefab;
     private GameObject groundObj;
 
-    private float minSpawnRate = 5f;
-    private float maxSpawnRate = 1f;
-
-    public float spawnDistance = 100f;
+    
 
 
     private float timeSinceSpawn = 0f;
     private float timeSinceStart = 0f;
+
+    //Obstacles
+    public float spawnDistance = 100f;
+
+
+    private float minSpawnRate = 10f;
+    private float maxSpawnRate = 4f;
+
+
+
+    private float minSpace = 10f;
+    private float maxSpace = 1f;
 
 
     private float minSpeed = 10f;
@@ -68,7 +77,7 @@ public class EventHandler : MonoBehaviour
         timeSinceStart += Time.deltaTime;
         timeSinceSpawn += Time.deltaTime;
 
-        float spawnRate = minSpawnRate + (maxSpawnRate - minSpawnRate) * Mathf.Min(1f, timeSinceSpawn / timeForMaxSpeed); ;
+        float spawnRate = difficultyInterpolation(minSpawnRate, maxSpawnRate);
 
         if (timeSinceSpawn >= spawnRate)
         {
@@ -87,7 +96,8 @@ public class EventHandler : MonoBehaviour
 
             ObstacleHandler OH = newInstance.GetComponent<ObstacleHandler>();
             OH.target = new Vector3((halfWidth/(1.1f + 0.9f*Random.value)) * x, 0f, (halfHeight/(1.1f + 0.9f*Random.value)) * z);
-            OH.speed = minSpeed + (maxSpeed - minSpeed) * Mathf.Min(1f, timeSinceSpawn/timeForMaxSpeed);
+            OH.speed = difficultyInterpolation(minSpeed, maxSpeed);
+            OH.space = difficultyInterpolation(minSpace, maxSpace);
 
         }
     }
@@ -140,6 +150,11 @@ public class EventHandler : MonoBehaviour
             }
         }
         return selected;
+    }
+
+    float difficultyInterpolation(float min, float max)
+    {
+        return min + (max - min) * Mathf.Min(1f, timeSinceSpawn / timeForMaxSpeed);
     }
 
 }

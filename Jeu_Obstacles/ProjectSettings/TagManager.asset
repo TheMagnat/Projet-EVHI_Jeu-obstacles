@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - UserHandler
   - Cardiaque
+  - GameHandler
   layers:
   - Default
   - TransparentFX

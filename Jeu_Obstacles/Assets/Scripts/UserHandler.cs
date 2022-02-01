@@ -27,6 +27,7 @@ public class UserHandler : MonoBehaviour
     private float timeSinceStart = 0f;
 
     public Dictionary<int, int> strategiePlacement;
+    public Dictionary<int, int> strategieEvitement;
     public Dictionary<int, int> directionCamera;
     public List<double> pouls;
     
@@ -58,6 +59,12 @@ public class UserHandler : MonoBehaviour
             { 7, 0 },
             { 8, 0 },
             { 9, 0 }
+        };
+
+        strategiePlacement = new Dictionary<int, int>{
+            { 1, 0 },
+            { 2, 0 },
+            { 3, 0 }
         };
 
         directionCamera = new Dictionary<int, int>{
@@ -112,6 +119,7 @@ public class UserHandler : MonoBehaviour
     public void pushToProfile()
     {
         MainMenuController.currentProfile.strategiePlacement.Add( strategiePlacement );
+        MainMenuController.currentProfile.strategieEvitement.Add( strategieEvitement );
         MainMenuController.currentProfile.directionCamera.Add( directionCamera );
         MainMenuController.currentProfile.durees.Add(timeSinceStart);
     }

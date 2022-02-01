@@ -32,15 +32,12 @@ public class ObstacleHandler : MonoBehaviour
         direction = target - transform.position;
         direction = direction.normalized;
 
-        //direction = Vector3.Normalize(new Vector3(1f, 0f, 1f));
-
         leftWall = transform.GetChild(0).gameObject;
         rightWall = transform.GetChild(1).gameObject;
 
         leftWall.transform.Translate(-space/2f, 0f, 0f);
         rightWall.transform.Translate(space/2f, 0f, 0f);
 
-        //Debug.DrawLine(pos, pos + dir * 10, Color.red, Mathf.Infinity);
     }
 
     private void FixedUpdate()
