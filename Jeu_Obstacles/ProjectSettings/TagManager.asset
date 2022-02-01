@@ -9,6 +9,7 @@ TagManager:
   - UserHandler
   - Cardiaque
   - GameHandler
+  - barre
   layers:
   - Default
   - TransparentFX

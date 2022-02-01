@@ -159,6 +159,12 @@ namespace Profile{
         
         //Base Level equation
         public float BaseLevel(){
+
+            if (this.durees.Count == 0)
+            {
+                return 1f;
+            }
+
             float max_ = this.durees.Max();
             float min_ = (this.durees.Count < 2) ? 0f : this.durees.Min();
             List<float> wk = new List<float>();
@@ -166,7 +172,7 @@ namespace Profile{
                 wk.Add(((this.durees[i] - min_) / (max_ - min_))+1);
             }
 
-            double sum = (this.dates.Count < 1) ? 0.5: 0.0;
+            double sum = 0.0;
             double diffDay;
             DateTime date;
             TimeSpan diffTime;
@@ -176,6 +182,7 @@ namespace Profile{
                 diffDay = diffTime.TotalDays/wk[i];
                 sum += Math.Pow(diffDay,-0.5);
             }
+
             return (float) Math.Max(Math.Log(sum),0.5);
         }
     }

@@ -6,12 +6,14 @@ public class EventHandler : MonoBehaviour
 {
 
     public GameObject obstaclePrefab;
+    public GameObject projectilePrefab;
     private GameObject groundObj;
 
     
 
 
     private float timeSinceSpawn = 0f;
+    private float timeProjectileSinceSpawn = 0f;
     private float timeSinceStart = 0f;
 
     //Obstacles
@@ -20,6 +22,8 @@ public class EventHandler : MonoBehaviour
 
     private float minSpawnRate = 10f;
     private float maxSpawnRate = 4f;
+    private float minProjectileSpawnRate = 9f;
+    private float maxProjectileSpawnRate = 3f;
 
 
 
@@ -29,6 +33,9 @@ public class EventHandler : MonoBehaviour
 
     private float minSpeed = 10f;
     private float maxSpeed = 30f;
+    private float minProjectileSpeed = 12f;
+    private float maxProjectileSpeed = 33f;
+
     private float timeForMaxSpeed = 60f;
 
 
@@ -63,6 +70,7 @@ public class EventHandler : MonoBehaviour
         stepX = width / 3;
         stepZ = height / 3;
 
+        timeForMaxSpeed /= MainMenuController.currentProfile.BaseLevel();
 
         indexToSpawnPosition = new List<Vector3>
             { new Vector3(-1f, 0f, 0f), new Vector3(-1f, 0f, 1f), new Vector3(0f, 0f, 1f), new Vector3(1f, 0f, 1f), new Vector3(1f, 0f, 0f), new Vector3(1f, 0f, -1f), new Vector3(0f, 0f, -1f), new Vector3(-1f, 0f, -1f) };
@@ -74,10 +82,36 @@ public class EventHandler : MonoBehaviour
     void Update()
     {
 
-        timeSinceStart += Time.deltaTime;
-        timeSinceSpawn += Time.deltaTime;
+        float BL = MainMenuController.currentProfile.BaseLevel();
 
-        float spawnRate = difficultyInterpolation(minSpawnRate, maxSpawnRate);
+        timeSinceStart += Time.deltaTime;
+
+        timeSinceSpawn += Time.deltaTime;
+        timeProjectileSinceSpawn += Time.deltaTime;
+
+        float spawnRate = difficultyInterpolation(minSpawnRate, maxSpawnRate) * BL;
+        float projectileSpawnRate = difficultyInterpolation(minSpawnRate, maxSpawnRate) * BL;
+
+        if (timeProjectileSinceSpawn >= spawnRate) {
+            timeProjectileSinceSpawn = 0f;
+
+            //Select spawn position
+            int selectedSpawnPos = selectProbaFromDict(userHandler.directionCamera);
+
+            //Select strategy evitement
+            int selectedEvitement = selectProbaFromDictNoReverse(userHandler.strategieEvitement);
+
+            Vector3 spawnPosition = indexToSpawnPosition[selectedSpawnPos - 1];
+            spawnPosition.y += 1 + Random.value * 3;
+
+            GameObject newInstance = Instantiate(projectilePrefab, Vector3.Normalize(indexToSpawnPosition[selectedSpawnPos - 1]) * spawnDistance, Quaternion.identity);
+
+            ProjectileHandler PH = newInstance.GetComponent<ProjectileHandler>();
+            PH.speed = difficultyInterpolation(minProjectileSpeed, maxProjectileSpeed) * BL;
+            PH.dodgeMode = selectedEvitement;
+
+        }
+
 
         if (timeSinceSpawn >= spawnRate)
         {
@@ -96,8 +130,14 @@ public class EventHandler : MonoBehaviour
 
             ObstacleHandler OH = newInstance.GetComponent<ObstacleHandler>();
             OH.target = new Vector3((halfWidth/(1.1f + 0.9f*Random.value)) * x, 0f, (halfHeight/(1.1f + 0.9f*Random.value)) * z);
-            OH.speed = difficultyInterpolation(minSpeed, maxSpeed);
-            OH.space = difficultyInterpolation(minSpace, maxSpace);
+
+            float test = difficultyInterpolation(minSpeed, maxSpeed) * BL;
+            OH.speed = test;
+            OH.space = difficultyInterpolation(minSpace, maxSpace) / BL;
+
+
+            //Debug.Log(OH.speed + " " + test);
+
 
         }
     }
@@ -152,9 +192,51 @@ public class EventHandler : MonoBehaviour
         return selected;
     }
 
+    int selectProbaFromDictNoReverse(Dictionary<int, int> dict)
+    {
+        float total = 0;
+
+        float[] save = new float[dict.Count];
+        foreach (var item in dict)
+        {
+            save[item.Key - 1] = item.Value + 1;
+
+            total += save[item.Key - 1];
+
+        }
+
+
+        for (int index = 0; index < save.Length; index++)
+        {
+            if (index == 0)
+            {
+                save[index] = save[index] / total;
+            }
+            else
+            {
+                save[index] = save[index - 1] + (save[index] + 1) / total;
+            }
+
+        }
+
+        float randomValue = Random.value;
+        int selected = 1;
+        for (int index = 0; index < save.Length; index++)
+        {
+
+            if (randomValue < save[index])
+            {
+                selected = index + 1;
+                break;
+            }
+        }
+        return selected;
+    }
+
     float difficultyInterpolation(float min, float max)
     {
-        return min + (max - min) * Mathf.Min(1f, timeSinceSpawn / timeForMaxSpeed);
+        //Debug.Log(min + " " + max + " " + (timeSinceStart / timeForMaxSpeed) + " " + (min + (max - min) * Mathf.Min(1f, timeSinceStart / timeForMaxSpeed)) );
+        return min + (max - min) * Mathf.Min(1f, timeSinceStart / timeForMaxSpeed);
     }
 
 }

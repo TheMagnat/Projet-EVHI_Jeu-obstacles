@@ -254,7 +254,7 @@ namespace StarterAssets
 		private void OnTriggerEnter(Collider other)
 		{
 
-			if (_input.block && other.gameObject.GetComponent<ProjectileHandler>().dodgeMode != 5)
+			if (_input.block && !other.gameObject.GetComponent<ProjectileHandler>().breakShield)
 			{
 				GameObject.FindGameObjectWithTag("UserHandler").GetComponent<UserHandler>().strategieEvitement[3] += 1;
 				Destroy(other.gameObject);	

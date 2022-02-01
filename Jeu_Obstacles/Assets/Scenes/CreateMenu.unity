@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571343, b: 0.30692208, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0.99999905, b: 0.99999905, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &202257411 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 202257411, guid: 230dccba4684308618374775403a179f, type: 3}
-  m_PrefabInstance: {fileID: 3032305599538890754}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &245089946
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,134 +380,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 202257412, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 202257413, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_Colors.m_SelectedColor.a
-      value: 0.89411765
-      objectReference: {fileID: 0}
-    - target: {fileID: 202257413, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_Colors.m_SelectedColor.b
-      value: 0.015625
-      objectReference: {fileID: 0}
-    - target: {fileID: 202257413, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_Colors.m_SelectedColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 202257413, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_Colors.m_SelectedColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 202257413, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 202257413, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 202257413, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 202257413, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1713228334, guid: 230dccba4684308618374775403a179f, type: 3}
-    - target: {fileID: 202257413, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 202257413, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 202257413, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnWrite
-      objectReference: {fileID: 0}
-    - target: {fileID: 202257413, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CreateMenuController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 202257413, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 202257411}
-    - target: {fileID: 202257413, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 522841310, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 522841310, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 522841310, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1713228334, guid: 230dccba4684308618374775403a179f, type: 3}
-    - target: {fileID: 522841310, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 522841310, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 522841310, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MenuButtonPush
-      objectReference: {fileID: 0}
-    - target: {fileID: 522841310, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CreateMenuController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 522841310, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: EndScreenController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 522841310, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 580461908, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 580461908, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 580461908, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1713228334, guid: 230dccba4684308618374775403a179f, type: 3}
-    - target: {fileID: 580461908, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 580461908, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CreateButtonPush
-      objectReference: {fileID: 0}
-    - target: {fileID: 580461908, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CreateMenuController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 580461908, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 202257411}
-    - target: {fileID: 580461908, guid: 230dccba4684308618374775403a179f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 3032305597827269167, guid: 230dccba4684308618374775403a179f, type: 3}
       propertyPath: m_Name
       value: CreateGUICanvas

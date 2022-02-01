@@ -49,7 +49,7 @@ public class ProjectileHandler : MonoBehaviour
         direction = target - transform.position;
         direction = direction.normalized;
 
-        dodgeMode = 3;
+        //dodgeMode = 3;
 
         if (dodgeMode >= 0)
         {
@@ -90,26 +90,27 @@ public class ProjectileHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         float distance = Vector3.Distance(transform.position, target);
 
         if (distance <= 0.3f && !finished)
         {
             finished = true;
 
-            Debug.Log(playerObj.transform.position);
+            //Debug.Log(playerObj.transform.position);
 
             var relativePoint = transform.InverseTransformPoint(playerObj.transform.position);
             if (relativePoint.x < 0.0)
             {
                 //Add to right
                 userHandler.strategieEvitement[2] += 1;
-                Debug.Log("Object is to the left");
+                //Debug.Log("Object is to the left");
             }
             else if (relativePoint.x >= 0.0)
             {
                 //Add to left
                 userHandler.strategieEvitement[1] += 1;
-                Debug.Log("Object is to the right");
+                //Debug.Log("Object is to the right");
             }
 
         }

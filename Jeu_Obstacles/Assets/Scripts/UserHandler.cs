@@ -61,7 +61,7 @@ public class UserHandler : MonoBehaviour
             { 9, 0 }
         };
 
-        strategiePlacement = new Dictionary<int, int>{
+        strategieEvitement = new Dictionary<int, int>{
             { 1, 0 },
             { 2, 0 },
             { 3, 0 }

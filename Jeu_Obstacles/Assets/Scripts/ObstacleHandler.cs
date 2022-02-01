@@ -23,7 +23,6 @@ public class ObstacleHandler : MonoBehaviour
 
     public Vector3 target;
 
-    // Start is called before the first frame update
     void Start()
     {
 
@@ -48,13 +47,10 @@ public class ObstacleHandler : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
 
-        
-        //Debug.Log(direction);
-        //leftWall.transform.Translate(direction * speed * Time.deltaTime);
+        //Debug.Log(speed + " " + space);
 
         float dist = Vector3.Distance(transform.position, new Vector3(0f, 0f, 0f));
 
@@ -72,10 +68,6 @@ public class ObstacleHandler : MonoBehaviour
         }
 
 
-    //rend.material.shader = Shader.Find("HDRenderPipeline/Lit");
-    //rend.material.SetColor("_Color", color);
-
-        //Debug.Log(Vector3.Distance(transform.position, new Vector3(0f, 0f, 0f)));
     }
 
     void changeAlpha(float alphaValue)
