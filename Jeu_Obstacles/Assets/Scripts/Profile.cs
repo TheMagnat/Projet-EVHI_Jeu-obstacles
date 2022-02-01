@@ -48,7 +48,7 @@ namespace Profile{
             List<float> weights = Enumerable.Range(1, size).Select(x => x/1.0f).ToList();
             int denom = (int) weights.Sum();
             for(int j=0; j<weights.Count; j+=1){
-                weights[j] = weights[j] /denom * size;
+                weights[j] = weights[j] /denom;
             }
             return weights;
         }
@@ -75,50 +75,50 @@ namespace Profile{
             return sum/this.pouls.Count;
         }
 
-        public List<float> getPlacementMean(){
+        public Dictionary<int,int> getPlacementMean(){
             List<float> weights = genWeights(this.strategiePlacement.Count);
-            List<float> mean = new List<float>();
+            Dictionary<int,int> mean = new Dictionary<int,int>();
             Dictionary<int, int>.KeyCollection keyColl = this.strategiePlacement[0].Keys;
-            int j = 0;
+            float tmp;
             foreach(int key in keyColl){
-                mean.Add(0f);
+                mean.Add(key,0);
+                tmp = 0f;
                 for(int i=0; i<this.strategiePlacement.Count; i++){
-                    mean[j] += this.strategiePlacement[i][key] * weights[i];
+                    tmp += this.strategiePlacement[i][key] * weights[i];
                 }
-                mean[j] /= this.strategiePlacement.Count;
-                j ++;
+                mean[key] = (int) (Math.Truncate(tmp / this.strategiePlacement.Count));
             }
             return mean;
         }
 
-        public List<float> getEvitementMean(){
+        public Dictionary<int,int> getEvitementMean(){
             List<float> weights = genWeights(this.strategieEvitement.Count);
-            List<float> mean = new List<float>();
+            Dictionary<int,int> mean = new Dictionary<int,int>();
             Dictionary<int, int>.KeyCollection keyColl = this.strategieEvitement[0].Keys;
-            int j = 0;
+            float tmp;
             foreach(int key in keyColl){
-                mean.Add(0f);
+                mean.Add(key,0);
+                tmp = 0f;
                 for(int i=0; i<this.strategieEvitement.Count; i++){
-                    mean[j] += this.strategieEvitement[i][key] * weights[i];
+                    tmp += this.strategieEvitement[i][key] * weights[i];
                 }
-                mean[j] /= this.strategieEvitement.Count;
-                j ++;
+                mean[key] = (int) (Math.Truncate(tmp / this.strategiePlacement.Count));
             }
             return mean;
         }
 
-        public List<float> getCameraMean(){
+        public Dictionary<int,int> getCameraMean(){
             List<float> weights = genWeights(this.directionCamera.Count);
-            List<float> mean = new List<float>();
+            Dictionary<int,int> mean = new Dictionary<int,int>();
             Dictionary<int, int>.KeyCollection keyColl = this.directionCamera[0].Keys;
-            int j = 0;
+            float tmp;
             foreach(int key in keyColl){
-                mean.Add(0f);
+                mean.Add(key,0);
+                tmp = 0f;
                 for(int i=0; i<this.directionCamera.Count; i++){
-                    mean[j] += this.directionCamera[i][key] * weights[i];
+                    tmp += this.directionCamera[i][key] * weights[i];
                 }
-                mean[j] /= this.directionCamera.Count;
-                j ++;
+                mean[key] = (int) (Math.Truncate(tmp / this.strategiePlacement.Count));
             }
             return mean;
         }
