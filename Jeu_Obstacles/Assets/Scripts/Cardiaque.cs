@@ -23,6 +23,15 @@ public class Cardiaque : MonoBehaviour
     {
         currentLevel += Random.value * 3.0 - 1.5;
 
+        if(currentLevel <= 60)
+        {
+            currentLevel += 3;
+        }
+        else if (currentLevel >= 150)
+        {
+            currentLevel -= 3;
+        }
+
         barre.transform.localScale = new Vector3(barre.transform.localScale.x, (float) (currentLevel * 2f) / 100f, barre.transform.localScale.z);
     }
 

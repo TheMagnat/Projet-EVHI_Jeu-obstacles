@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using System.Linq;
 
 public class UserHandler : MonoBehaviour
 {
@@ -30,7 +31,9 @@ public class UserHandler : MonoBehaviour
     public Dictionary<int, int> strategieEvitement;
     public Dictionary<int, int> directionCamera;
     public List<double> pouls;
-    
+
+    private bool doneSave = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -118,10 +121,30 @@ public class UserHandler : MonoBehaviour
 
     public void pushToProfile()
     {
-        MainMenuController.currentProfile.strategiePlacement.Add( strategiePlacement );
-        MainMenuController.currentProfile.strategieEvitement.Add( strategieEvitement );
-        MainMenuController.currentProfile.directionCamera.Add( directionCamera );
-        MainMenuController.currentProfile.durees.Add(timeSinceStart);
+
+        if (!doneSave)
+        {
+
+            doneSave = true;
+
+            MainMenuController.currentProfile.strategiePlacement.Add(strategiePlacement);
+            MainMenuController.currentProfile.strategieEvitement.Add(strategieEvitement);
+            MainMenuController.currentProfile.directionCamera.Add(directionCamera);
+            MainMenuController.currentProfile.durees.Add(timeSinceStart);
+
+            if (pouls.Count == 0)
+            {
+                MainMenuController.currentProfile.pouls.Add(MainMenuController.currentProfile.getPoulsMean());
+            }
+            else
+            {
+                MainMenuController.currentProfile.pouls.Add(pouls.Average());
+            }
+
+            MainMenuController.currentProfile.dates.Add(DateTime.Now.ToString("dd-MM-yyyy_HH:mm:ss"));
+
+        }
+
     }
 
 }
