@@ -15,6 +15,7 @@ public class GameHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UnityEngine.Cursor.visible = false;
         playerObj = GameObject.FindGameObjectWithTag("Player");
         userHandler = GameObject.FindGameObjectWithTag("UserHandler").GetComponent<UserHandler>();
     }

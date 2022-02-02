@@ -11,6 +11,9 @@ public class EndScreenController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+
+        UnityEngine.Cursor.visible = true;
+
         if (MainMenuController.currentProfile != null) {
             string jsonStr = JsonConvert.SerializeObject(MainMenuController.currentProfile);
             File.WriteAllText(@"./Assets/SaveProfiles/"+MainMenuController.currentProfile.name+".json", jsonStr);
